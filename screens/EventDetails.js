@@ -5,14 +5,13 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
 import { useSelector } from "react-redux";
 import ItemValue from "@/components/ItemValue";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { loginService } from "@/api/login";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const EventDetails = ({ route }) => {
   const { event } = route.params;
@@ -22,7 +21,7 @@ const EventDetails = ({ route }) => {
   const { mutateAsync: registerEvent, isLoading } = useMutation({
     mutationFn: () => loginService.registerUser(event.id, userId),
     onSuccess: () => {
-      navigation.navigate("Dashboard");
+      navigation.navigate("Main");
     },
     onError: (error) => {
       console.log("Error registering for event:", error);
@@ -74,7 +73,11 @@ const EventDetails = ({ route }) => {
         ))}
 
         <TouchableOpacity style={styles.button} onPress={registerEvent}>
-          <Text style={styles.buttonText}>Register</Text>
+          {isLoading ? (
+            <ActivityIndicator size="small" color="#fff" />
+          ) : (
+            <Text style={styles.buttonText}>Register</Text>
+          )}
         </TouchableOpacity>
       </View>
     </ScrollView>

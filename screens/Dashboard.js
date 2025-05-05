@@ -36,7 +36,9 @@ const Dashboard = () => {
   if (!registeredEvents?.length) {
     return (
       <View style={styles.container}>
-        <Text>You haven&apos;t registered for any events yet.</Text>
+        <Text style={styles.notRegisteredText}>
+          You haven&apos;t registered for any events yet.
+        </Text>
       </View>
     );
   }
@@ -76,6 +78,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+  },
+  notRegisteredText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 20,
+    color: "#666",
   },
   title: {
     fontSize: 22,

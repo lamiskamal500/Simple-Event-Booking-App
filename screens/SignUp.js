@@ -20,7 +20,7 @@ export default function SignUp() {
 
   const { mutateAsync: userRegister, isLoading } = useMutation({
     mutationFn: (data) =>
-      registerService.register(data.email, data.password, data.username),
+      registerService.register(data.email, data.username, data.password),
     onSuccess: (data) => {
       navigation.navigate("Main");
       dispatch(

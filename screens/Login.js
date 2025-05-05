@@ -19,6 +19,7 @@ export default function Login() {
 
   const { mutateAsync: userLogin, isLoading } = useMutation({
     mutationFn: (data) => loginService.login(data.email, data.password),
+    mutationKey: ["login"],
     onSuccess: (data) => {
       navigation.navigate("Main");
       dispatch(
